@@ -1,6 +1,12 @@
 # ExtractedValidator
 
-TODO: Write a gem description
+ActiveRecord and ActiveModel, as parts of Rails, are powerfull and cool
+things. They can do many works with simple API call. But coupling of model,
+validations and business logic in one place is awkward and ugly. Espessialy
+in big projects. And sometimes simple creating record for testing is painfull
+and I want to cry :cry:.
+
+And we must make our life and coding easier! Extract validations rules!
 
 ## Installation
 
@@ -20,7 +26,56 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Basic usage
+
+Validator is defining as separated class. For example:
+
+```ruby
+class PostValidator < ExtractedValidator::Base
+  validates :title, presence: true
+end
+```
+
+Then pass model that must be validated to initializer and use same API
+as well as you use validations in model class directly.
+
+```ruby
+post = Post.new title: 'New amazing post'
+
+validator = PostValidator.new(post)
+
+# Check if model valid
+validator.valid?
+
+# Return Errors instance
+validator.errors
+
+# Return errors messages
+validator.errors_messages
+validator.errors_full_messages
+```
+
+### Model class required validations
+
+Some validations is required model class for do work well. For example,
+`validates_uniqueness_of` and others. To consider this cases we must pass
+model class like in the next example:
+
+```ruby
+class PostValidator < ExtractedValidator::Base[Post]
+  validates :title, presence: true
+  validates_uniqueness_of :title
+end
+```
+
+### Place for validators
+
+IMHO validators must be contained in `app/validators` folder. Don't forget
+to add this path for autoloading in `config/application.rb`
+
+```ruby
+config.autoload_paths += %W(#{config.root}/app/validators)
+```
 
 ## Contributing
 
