@@ -45,7 +45,7 @@ end
 ```
 
 Then pass model that must be validated to initializer and use same API
-as well as you use validations in model class directly.
+as well as you use validations on model directly.
 
 ```ruby
 post = Post.new title: 'New amazing post'
