@@ -1,7 +1,7 @@
 $TESTING = true
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 
-$CODECLIMATE_REPO_TOKEN = ''
+$CODECLIMATE_REPO_TOKEN = '830e010682e6f678daaf56d47bd46eb9dc2e879a9305efd231baba6fec0df541'
 
 require 'rspec/its'
 require 'extracted_validator'

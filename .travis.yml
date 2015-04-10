@@ -1,0 +1,11 @@
+language: ruby
+cache: bundler
+
+rvm:
+      - 2.1.2
+
+script: 'CODECLIMATE_REPO_TOKEN=830e010682e6f678daaf56d47bd46eb9dc2e879a9305efd231baba6fec0df541  bundle exec rake'
+
+addons:
+      code_climate:
+              repo_token: 830e010682e6f678daaf56d47bd46eb9dc2e879a9305efd231baba6fec0df541

@@ -1,5 +1,9 @@
 # ExtractedValidator
 
+[![Code Climate](https://codeclimate.com/github/alterego-labs/extracted_validator/badges/gpa.svg)](https://codeclimate.com/github/alterego-labs/extracted_validator)
+[![Test Coverage](https://codeclimate.com/github/alterego-labs/extracted_validator/badges/coverage.svg)](https://codeclimate.com/github/alterego-labs/extracted_validator)
+[![Build Status](https://travis-ci.org/alterego-labs/extracted_validator.svg)](https://travis-ci.org/alterego-labs/extracted_validator)
+
 ActiveRecord and ActiveModel, as parts of Rails, are powerfull and cool
 things. They can do many works with simple API call. But coupling of model,
 validations and business logic in one place is awkward and ugly. Espessialy
@@ -79,7 +83,7 @@ config.autoload_paths += %W(#{config.root}/app/validators)
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/extracted_validator/fork )
+1. Fork it ( https://github.com/alterego-labs/extracted_validator/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
