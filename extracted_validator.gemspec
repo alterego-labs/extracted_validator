@@ -26,4 +26,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec-its",      "1.2.0"
   spec.add_development_dependency "pry-nav",        "0.2.3"
   spec.add_development_dependency "codeclimate-test-reporter",        "0.4.0"
+  spec.add_development_dependency "sqlite3"
 end

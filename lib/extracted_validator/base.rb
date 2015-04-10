@@ -18,8 +18,8 @@ module ExtractedValidator
       model.send name, *args, &block
     end
 
-    def self.method_missing(name, *args, &block)
-      model_class.send name, *args, &block
+    def add_error(message, scope: :base)
+      errors[scope] << message
     end
   end
 end

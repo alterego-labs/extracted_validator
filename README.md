@@ -36,7 +36,11 @@ Validator is defining as separated class. For example:
 
 ```ruby
 class PostValidator < ExtractedValidator::Base
-  validates :title, presence: true
+  validate :title_for_blank
+
+  def title_for_blank
+    add_error('Title must be set!') if title.blank?
+  end
 end
 ```
 

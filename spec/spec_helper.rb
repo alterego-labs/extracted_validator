@@ -6,9 +6,20 @@ $CODECLIMATE_REPO_TOKEN = '830e010682e6f678daaf56d47bd46eb9dc2e879a9305efd231bab
 require 'rspec/its'
 require 'extracted_validator'
 require 'codeclimate-test-reporter'
+require 'active_record'
+
 CodeClimate::TestReporter.start
 
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
+
+DB_FILE = 'tmp/test_db'
+
+FileUtils.mkdir_p File.dirname(DB_FILE)
+FileUtils.rm_f DB_FILE
+
+ActiveRecord::Base.establish_connection adapter: 'sqlite3', database: DB_FILE
+ActiveRecord::Base.connection.execute 'CREATE TABLE posts (id INTEGER NOT NULL PRIMARY KEY, title VARCHAR(125))'
+
 
 RSpec.configure do |config|
   config.mock_with :rspec
