@@ -1,5 +1,5 @@
 require "extracted_validator/version"
 
 module ExtractedValidator
-  # Your code goes here...
+  autoload :Base, 'extracted_validator/base'
 end
