@@ -20,6 +20,9 @@ FileUtils.rm_f DB_FILE
 ActiveRecord::Base.establish_connection adapter: 'sqlite3', database: DB_FILE
 ActiveRecord::Base.connection.execute 'CREATE TABLE posts (id INTEGER NOT NULL PRIMARY KEY, title VARCHAR(125))'
 
+class Post < ActiveRecord::Base
+end
+
 
 RSpec.configure do |config|
   config.mock_with :rspec

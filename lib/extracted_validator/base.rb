@@ -21,5 +21,17 @@ module ExtractedValidator
     def add_error(message, scope: :base)
       errors[scope] << message
     end
+
+    def self.method_missing(name, *args, &block)
+      model_class.send name, *args, &block
+    end
+
+    def self.[](model)
+      Class.new(self) do
+        define_singleton_method :model_class do
+          model
+        end
+      end
+    end
   end
 end

@@ -9,9 +9,6 @@ class PostValidator < ExtractedValidator::Base
   end
 end
 
-class Post < ActiveRecord::Base
-end
-
 describe 'Basic usage' do
   subject(:validator) { PostValidator.new(post) }
 
