@@ -31,6 +31,10 @@ module ExtractedValidator
         define_singleton_method :model_class do
           model
         end
+
+        define_singleton_method :model_name do
+          ActiveModel::Name.new(model)
+        end
       end
     end
   end

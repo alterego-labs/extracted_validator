@@ -8,6 +8,8 @@ require 'extracted_validator'
 require 'codeclimate-test-reporter'
 require 'active_record'
 
+require 'pry-nav'
+
 CodeClimate::TestReporter.start
 
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
@@ -19,10 +21,14 @@ FileUtils.rm_f DB_FILE
 
 ActiveRecord::Base.establish_connection adapter: 'sqlite3', database: DB_FILE
 ActiveRecord::Base.connection.execute 'CREATE TABLE posts (id INTEGER NOT NULL PRIMARY KEY, title VARCHAR(125))'
+ActiveRecord::Base.connection.execute 'CREATE TABLE users (id INTEGER NOT NULL PRIMARY KEY, password VARCHAR(125))'
 
 class Post < ActiveRecord::Base
 end
 
+class User < ActiveRecord::Base
+  attr_accessor :password_confirmation
+end
 
 RSpec.configure do |config|
   config.mock_with :rspec
