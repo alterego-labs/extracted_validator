@@ -10,6 +10,8 @@ module ExtractedValidator
     module AssociationsValidation
       extend ActiveSupport::Concern
 
+      NoValidatorProvidedError = Class.new(StandardError)
+
       included do
         cattr_reader :assoc_validations_register
         @@assoc_validations_register = []
@@ -25,6 +27,7 @@ module ExtractedValidator
         # *by* - class of validator
         #
         def validating(name, by: nil)
+          raise NoValidatorProvidedError if by.nil?
           @@assoc_validations_register << name
         end
       end
