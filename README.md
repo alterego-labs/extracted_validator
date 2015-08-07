@@ -76,6 +76,41 @@ class PostValidator < ExtractedValidator::Base[Post]
 end
 ```
 
+### Association validation
+
+In most cases records are not independent. There are singular or plural
+associations and you will want to be able to validate all the tree of
+records. Lets consider the example below:
+
+```ruby
+# We has next models
+class Article < ActiveRecord::Base
+  has_many :comments
+end
+
+class Comment < ActiveRecord::Base
+  belongs_to :article
+end
+
+# Lets define some validator
+class CommentValidator < ExtractedValidator::Base[Comment]
+  validates :body, presence: true
+end
+
+class ArticleValidator < ExtractedValidator::Base[Article]
+  validates :title, presence: true
+
+  validating :comments, by: CommentValidator
+end
+
+article = Article.new
+article.comments.build
+
+validator = ArticleValidator.new(article)
+
+validator.valid? # => false
+```
+
 ### Place for validators
 
 IMHO validators must be contained in `app/validators` folder. Don't forget
