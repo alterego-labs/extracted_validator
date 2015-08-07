@@ -3,7 +3,7 @@ module ExtractedValidator
     class Singular < Base
       def validate(object)
         item = object.send name
-        process_assoc_item item, object
+        process_association_element item, object
       end
     end
   end

@@ -19,5 +19,6 @@ describe ExtractedValidator::Concerns::AssociationsValidation do
     subject(:validator) { AssociationsValidationSpec.new }
 
     it { is_expected.to respond_to :valid_with_associations? }
+    it { is_expected.to respond_to :valid_without_associations? }
   end
 end

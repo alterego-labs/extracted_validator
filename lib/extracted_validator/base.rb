@@ -22,6 +22,7 @@ module ExtractedValidator
   # # is_valid = UserSignUpValidator.new(new_user).valid?
   class Base < SimpleDelegator
     include ActiveRecord::Validations
+    include ExtractedValidator::Concerns::AssociationsValidation
 
     alias_method :model, :__getobj__
 

@@ -13,8 +13,7 @@ module ExtractedValidator
       NoValidatorProvidedError = Class.new(StandardError)
 
       included do
-        cattr_reader :assoc_validations_register
-        @@assoc_validations_register = []
+        @assoc_validations_register = []
         alias_method_chain :valid?, :associations
       end
 
@@ -28,11 +27,25 @@ module ExtractedValidator
         #
         def validating(name, by: nil)
           raise NoValidatorProvidedError if by.nil?
-          @@assoc_validations_register << name
+          register = assoc_validations_register
+          register << ExtractedValidator::Associations::Factory.by_name(name, by)
+          @assoc_validations_register = register
+        end
+
+        #
+        # Returns array of registered associatiosn validations
+        #
+        def assoc_validations_register
+          @assoc_validations_register ||= []
         end
       end
 
       def valid_with_associations?
+        register = self.class.assoc_validations_register
+        assoc_result = register.reduce(true) do |res, item|
+          res && item.validate(self)
+        end
+        assoc_result && valid_without_associations?
       end
     end
   end
